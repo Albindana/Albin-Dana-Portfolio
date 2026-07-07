@@ -16,10 +16,13 @@ export function Nav({ theme, onToggleTheme, drawerOpen, onToggleDrawer, onCloseD
   return (
     <>
       <header className={`nav ${scrolled ? 'is-scrolled' : ''}`} id="nav">
-        <a href="#top" className="nav__brand">
-          <span className="nav__bracket">[</span> albin <span className="nav__cursor">_</span>{' '}
-          <span className="nav__bracket">]</span>
-        </a>
+        <div className="nav__start">
+          <a href="#top" className="nav__brand">
+            <span className="nav__bracket">[</span> albin <span className="nav__cursor">_</span>{' '}
+            <span className="nav__bracket">]</span>
+          </a>
+        </div>
+
         <nav className="nav__links">
           {NAV_LINKS.map((l) => (
             <a key={l.href} href={l.href}>
@@ -27,26 +30,29 @@ export function Nav({ theme, onToggleTheme, drawerOpen, onToggleDrawer, onCloseD
             </a>
           ))}
         </nav>
-        <a href="#contact" className="btn btn--ghost nav__cta" data-magnetic>
-          Get in touch
-        </a>
-        <button
-          className="nav__theme"
-          onClick={onToggleTheme}
-          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-          title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-        >
-          {theme === 'dark' ? '☀' : '☾'}
-        </button>
-        <button
-          className={`nav__burger ${drawerOpen ? 'is-open' : ''}`}
-          aria-label="Menu"
-          onClick={onToggleDrawer}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+
+        <div className="nav__end">
+          <a href="#contact" className="btn btn--ghost nav__cta" data-magnetic>
+            Get in touch
+          </a>
+          <button
+            className="nav__theme"
+            onClick={onToggleTheme}
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? '☀' : '☾'}
+          </button>
+          <button
+            className={`nav__burger ${drawerOpen ? 'is-open' : ''}`}
+            aria-label="Menu"
+            onClick={onToggleDrawer}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
       </header>
 
       <div className={`drawer ${drawerOpen ? 'is-open' : ''}`}>

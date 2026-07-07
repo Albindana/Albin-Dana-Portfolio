@@ -17,9 +17,11 @@ function ProjectCard({ p }: { p: Project }) {
       <div className="project__top">
         <span className="project__icon">{p.icon}</span>
         <div className="project__links">
-          <a href={p.live} target="_blank" rel="noopener">
-            live ↗
-          </a>
+          {p.live !== '#' && (
+            <a href={p.live} target="_blank" rel="noopener">
+              live ↗
+            </a>
+          )}
           <a href={p.repo} target="_blank" rel="noopener">
             code ↗
           </a>

@@ -10,9 +10,9 @@ interface Status {
 
 const LINKS = [
   { icon: '✉', label: 'Email', href: 'mailto:albindana3@gmail.com', external: false },
-  { icon: '⌥', label: 'GitHub', href: 'https://github.com', external: true },
-  { icon: 'in', label: 'LinkedIn', href: 'https://linkedin.com', external: true },
-  { icon: '⤓', label: 'Resume', href: '#', external: false },
+  { icon: '⌥', label: 'GitHub', href: 'https://github.com/Albindana', external: true },
+  { icon: 'in', label: 'LinkedIn', href: 'https://www.linkedin.com/in/albin-dana-374812292/', external: true },
+  { icon: '⤓', label: 'CV', href: '/Albin_Dana_CV.pdf', external: true, download: true },
 ]
 
 export function Contact() {
@@ -73,6 +73,7 @@ export function Contact() {
               href={l.href}
               data-magnetic
               {...(l.external ? { target: '_blank', rel: 'noopener' } : {})}
+              {...('download' in l && l.download ? { download: 'Albin_Dana_CV.pdf' } : {})}
             >
               <span>{l.icon}</span> {l.label}
             </a>
