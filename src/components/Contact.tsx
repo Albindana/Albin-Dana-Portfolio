@@ -19,7 +19,7 @@ export function Contact() {
   const [status, setStatus] = useState<Status | null>(null)
   const { ref: formRef, inView: formInView } = useInView<HTMLFormElement>()
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const form = e.currentTarget
     const data = new FormData(form)
@@ -27,11 +27,32 @@ export function Contact() {
       setStatus({ text: '✗ all fields are required', tone: 'coral' })
       return
     }
+
     setStatus({ text: '⟳ sending...', tone: 'accent' })
-    setTimeout(() => {
-      setStatus({ text: "✓ message sent — I'll get back to you soon.", tone: 'accent' })
-      form.reset()
-    }, 900)
+
+    const endpoint = import.meta.env.VITE_CONTACT_FORM_ENDPOINT as string | undefined
+
+    if (endpoint) {
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        })
+
+        if (!response.ok) {
+          throw new Error('request failed')
+        }
+
+        setStatus({ text: "✓ message sent — I'll get back to you soon.", tone: 'accent' })
+        form.reset()
+      } catch {
+        setStatus({ text: '✗ something went wrong — please email me directly.', tone: 'coral' })
+      }
+      return
+    }
+
+    form.submit()
   }
 
   return (
@@ -42,8 +63,14 @@ export function Contact() {
           ref={formRef}
           className={`contact__form reveal ${formInView ? 'is-visible' : ''}`}
           onSubmit={onSubmit}
+          method="POST"
+          action="/"
+          data-netlify="true"
+          name="contact"
           noValidate
         >
+          <input type="hidden" name="form-name" value="contact" />
+          <input type="text" name="bot-field" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
           <label>
             name <input type="text" name="name" required placeholder="your name" />
           </label>
