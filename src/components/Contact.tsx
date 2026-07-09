@@ -23,12 +23,16 @@ export function Contact() {
     e.preventDefault()
     const form = e.currentTarget
     const data = new FormData(form)
-    if (!data.get('name') || !data.get('email') || !data.get('message')) {
+    const name = String(data.get('name') || '').trim()
+    const email = String(data.get('email') || '').trim()
+    const message = String(data.get('message') || '').trim()
+
+    if (!name || !email || !message) {
       setStatus({ text: '✗ all fields are required', tone: 'coral' })
       return
     }
 
-    setStatus({ text: '⟳ sending...', tone: 'accent' })
+    setStatus({ text: '⟳ preparing message...', tone: 'accent' })
 
     const endpoint = import.meta.env.VITE_CONTACT_FORM_ENDPOINT as string | undefined
 
@@ -52,7 +56,9 @@ export function Contact() {
       return
     }
 
-    form.submit()
+    const mailtoLink = `mailto:albindana3@gmail.com?subject=${encodeURIComponent(`Website contact from ${name}`)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`
+    window.location.href = mailtoLink
+    setStatus({ text: '↗ opening your email app…', tone: 'accent' })
   }
 
   return (
@@ -63,14 +69,8 @@ export function Contact() {
           ref={formRef}
           className={`contact__form reveal ${formInView ? 'is-visible' : ''}`}
           onSubmit={onSubmit}
-          method="POST"
-          action="/"
-          data-netlify="true"
-          name="contact"
           noValidate
         >
-          <input type="hidden" name="form-name" value="contact" />
-          <input type="text" name="bot-field" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
           <label>
             name <input type="text" name="name" required placeholder="your name" />
           </label>
