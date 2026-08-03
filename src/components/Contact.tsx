@@ -100,7 +100,7 @@ export function Contact() {
               href={l.href}
               data-magnetic
               {...(l.external ? { target: '_blank', rel: 'noopener' } : {})}
-              {...('download' in l && l.download ? { download: 'Albin_Dana_CV.pdf' } : {})}
+              {...('download' in l && l.download ? { download: 'AlbinDanaCV.pdf' } : {})}
             >
               <span>{l.icon}</span> {l.label}
             </a>
