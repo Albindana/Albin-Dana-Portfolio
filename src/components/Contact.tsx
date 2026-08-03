@@ -12,7 +12,7 @@ const LINKS = [
   { icon: '✉', label: 'Email', href: 'mailto:albindana3@gmail.com', external: false },
   { icon: '⌥', label: 'GitHub', href: 'https://github.com/Albindana', external: true },
   { icon: 'in', label: 'LinkedIn', href: 'https://www.linkedin.com/in/albin-dana-374812292/', external: true },
-  { icon: '⤓', label: 'CV', href: '/Albin_Dana_CV.pdf', external: true, download: true },
+  { icon: '⤓', label: 'CV', href: '/AlbinDanaCV.pdf', external: true, download: true },
 ]
 
 export function Contact() {
