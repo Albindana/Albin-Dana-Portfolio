@@ -32,6 +32,14 @@ export function Nav({ theme, onToggleTheme, drawerOpen, onToggleDrawer, onCloseD
         </nav>
 
         <div className="nav__end">
+          <a
+            href="/AlbinDanaCV.pdf"
+            className="rainbow-btn nav__cta"
+            download="AlbinDanaCV.pdf"
+            aria-label="Download my CV"
+          >
+            Download my CV
+          </a>
           <a href="#contact" className="btn btn--ghost nav__cta" data-magnetic>
             Get in touch
           </a>
