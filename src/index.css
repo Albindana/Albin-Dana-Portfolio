@@ -243,7 +243,7 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--font-mono);
   font-size: 14px;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--text);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
